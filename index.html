@@ -19,7 +19,7 @@
   </header>
   <main class="main-content">
    <div class="main-screen ">
-     <div class ="created-quizzes">
+     <div class ="created-quizzes minimize">
        <div class="conceived-quizzes">
           <p class ="all-quizzes your-quizzes"> Seus Quizzes </p>
           <button class= "button-add" onclick="criarQuizz()">
@@ -27,18 +27,18 @@
           </button>
         </div>
           <div class="new-quizzes">
-            <div class="quizz" data-identifier="quizz-card" >
+            <div class="quizz" data-identifier="quizz-card">
               <p class = "quizzes-names typography"></p>
             </div>
-            <div class="quizz" data-identifier="quizz-card"  >
+            <div class="quizz" data-identifier="quizz-card">
               <p class = "quizzes-names typography"></p>
             </div>
-            <div class="quizz" data-identifier="quizz-card" >
+            <div class="quizz" data-identifier="quizz-card">
               <p class = "quizzes-names typography"></p>
             </div>
           </div>
      </div>
-      <div class="upper-box minimize">
+      <div class="upper-box">
         <div class = "first-line">
           <div class= "noquizzyet"> Você não criou nenhum quizz ainda :( </div>
         </div>
@@ -51,29 +51,12 @@
       </div>      
 
       <div class="quizzes">
-        <div class="quizz" data-identifier="quizz-card" >
-          <p class = "quizzes-names typography"></p>
-        </div>
-        <div class="quizz" data-identifier="quizz-card"  >
-          <p class = "quizzes-names typography"></p>
-        </div>
-        <div class="quizz" data-identifier="quizz-card" >
+        <div class="quizz" data-identifier="quizz-card"  onclick="getQuizz()">
           <p class = "quizzes-names typography"></p>
         </div>
       </div>
-      <div class="quizzes">
-        <div class="quizz" data-identifier="quizz-card" >
-          <p class = "quizzes-names typography"></p>
-        </div>
-        <div class="quizz" data-identifier="quizz-card" >
-          <p class = "quizzes-names typography"></p>
-        </div>
-        <div class="quizz" data-identifier="quizz-card" >
-          <p class = "quizzes-names typography"></p>
-        </div>
     </div>
-    </div>  
-
+    
     <div class="quizz-screen minimize">
       <div class="title-quizz">
         <img src="#"/>
@@ -137,7 +120,7 @@
         </div>
         
         <button class="restart">Reiniciar Quizz</button>
-        <p class="back-home">Voltar para home</´p>
+        <p class="back-home">Voltar para home </p>
 
       </div>
     </div>
@@ -190,7 +173,7 @@
   </div>
   <div class="level-page minimize">
       <div class="quizz-title">
-          Agora decida os níves
+          Agora decida os níveis
       </div>
       <div class="input-infos">
           <div class="questions-title">Pergunta 1</div>
