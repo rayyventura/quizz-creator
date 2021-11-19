@@ -91,23 +91,41 @@ body{
     font-weight: 700;
     line-height: 23px;
     letter-spacing: 0em;
-    
+    color: #000000;
+}
+.created-quizzes{
+    margin-top: 138px;
+}
+.conceived-quizzes {
+    display:flex;
+    flex-wrap: nowrap;
 }
 .your-quizzes{
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 23px;
-    letter-spacing: 0em;
-    text-align: center;
+    height: 23px;
+    width: 122px;
+    margin-bottom: 13px;
 }
-.add-vector{
+.button-add{
     height: 30px;
     width: 31px;
+    margin-left:17px;
     border-radius:500px; 
     background-color:#EC362D;
+    border: #EC362D;
+    margin-bottom:10px;
+}
+.add-vector{
+    height: 13px;
+    width: 13px;
+    left: 342px;
+    top: 142px;
 }
 .quizzes{
+    display:flex;
+    flex-wrap: nowrap;
+}
+.new-quizzes{
+   
     display:flex;
     flex-wrap: nowrap;
 }
