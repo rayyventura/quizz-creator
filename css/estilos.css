@@ -39,24 +39,24 @@ body{
 .upper-box{
     height: 181px;
     width: 1051px;
-    left: 194px;
-    top: 146px;
     border-radius: 5px;
     border: 1px dashed #D4D4D4;
     background-color:#FAFAFA;
+    margin-top: 144px;
     display:flex;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
     justify-content: center;
-    margin-top: 77px;
+    
  }
 .first-line {
-    height: 107px;
-    width: 250px;
+    width: 100%;
     margin-top:7px;
     display:flex;
+    justify-content:center;
     align-items: center; 
 }
 .noquizzyet{
+    width: 250px;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -119,13 +119,24 @@ body{
     border-radius: 5px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
 }
+.quizzes-names{
+    height: 54px;
+    width: 301px;
+    left: 36px;
+    top: 473px;
+}
+.typography{
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+}
 .quizz-screen{
     width: 100%;
-
     margin: 69px 0px 69px 0px;
-
     background-color:#FAFAFA;
-
     position: absolute;
     top: 0;
     z-index: 2;
@@ -133,13 +144,10 @@ body{
 .title-quizz{
     width: 100%;
     height: 227px;
-
     font-size: 39px;
     font-weight: 400;
     color: #FFFFFF;
-
     line-height: 45.7px;
-
     position: relative;
 }
 .title-quizz img {
@@ -149,10 +157,8 @@ body{
 .shadow{
     width: 100%;
     height: 100%;
-
     background-color: #000000;
     opacity: 0.6;
-
     position: absolute;
     top:0;
     z-index: 3;
@@ -160,11 +166,9 @@ body{
 .title-quizz p{
     width: 100%;
     height: 100%;
-
     position: absolute;
     top: 0;
     z-index: 4;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -173,19 +177,14 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-
     margin-bottom: 85px;
 }
 .box-quizz{
     width: 759px;
     height: 676px;
-
     padding: 28px 35px 28px 35px;
     margin: 42px 0px 0px 0px;
-
     box-shadow: 0px 0px 10px 0px #0000000D;
-
-
     background-color: #FFFFFF;
 }
 .question{
