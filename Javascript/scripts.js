@@ -25,26 +25,45 @@ function tirarPag3(){
 function tirarPag4(){
     finalPage.classList.add('minimize')
 }
+function showingQuizzLayout (quizz){
+    const quizzCard = document.createElement("div")
+    const image = `<img src ="${quizz.image}">`
+    quizzCard.setAttribute("data-identifier","quizz-card");
+    quizzCard.classList.add("quizz")
+    const quizzTitle = `<p class ="quizzes-names typography">(${quizz.title})</p>`
+    let quizzSpace = document.querySelector(".quizzes")
+    quizzCard.innerHTML= `${image} ${quizzTitle}`
+    quizz.onclick = function (){
+        startquizz(quizz.id)
+    }
+    quizzSpace.appendChild(quizzCard)
+    
+}
 function getQuizzes(){
     const promise= axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
     promise.then(
         function success (result){
+        for(let i= 0; i < result.data.length;i++){
+            showingQuizzLayout(result.data[i])
+        }
             console.log(result)
         }
     )
-    promise.catch(function error(){
-            console.log()
+    promise.catch(function error(fault){
+            console.log(fault)
         }
     )
+
+
 }
 function getQuizz(quizzId){
     const obtainingAQuiz= axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizzId}`)
-    promise.then(
+    obtainingAQuiz.then(
         function success (result){
             console.log(result)
         }
     )
-    promise.catch(function error(){
+    obtainingAQuiz.catch(function error(){
         console.log()
     }
 )
@@ -185,3 +204,5 @@ function backhome(){
     document.querySelector(".main-screen").classList.remove("minimize");
     document.querySelector(".quizz-screen").classList.add("minimize");
 }
+
+getQuizzes()
