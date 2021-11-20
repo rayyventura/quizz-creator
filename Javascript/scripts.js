@@ -3,6 +3,8 @@ const basicInfo = document.querySelector('.basic-info');
 const quizzQuestions = document.querySelector('.quizz-questions');
 const quizzLevels = document.querySelector('.level-page');
 const mainScreen = document.querySelector(".main-screen");
+const createdQuizzes = document.querySelector(".created-quizzes");
+
 function criarQuizz(){
     basicInfo.classList.remove('minimize');
     mainScreen.classList.add('minimize');
@@ -25,13 +27,33 @@ function tirarPag4(){
 }
 function getQuizzes(){
     const promise= axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes")
+    promise.then(
+        function success (result){
+            console.log(result)
+        }
+    )
+    promise.catch(function error(){
+            console.log()
+        }
+    )
 }
+function getQuizz(quizzId){
+    const obtainingAQuiz= axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${quizzId}`)
+    promise.then(
+        function success (result){
+            console.log(result)
+        }
+    )
+    promise.catch(function error(){
+        console.log()
+    }
+)
 
+}
 
 
 let countquizz = [0,0];
 let levelinfo;
-
 function startquizz(id){
     document.querySelector(".main-screen").classList.add("minimize");
     document.querySelector(".quizz-screen").classList.remove("minimize");
