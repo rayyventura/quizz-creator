@@ -27,13 +27,13 @@ function tirarPag4(){
 }
 function showingQuizzLayout (quizz){
     const quizzCard = document.createElement("div")
-    const image = `<img src ="${quizz.image}">`
+    const image = `<img class="img-layout" src ="${quizz.image}">`
     quizzCard.setAttribute("data-identifier","quizz-card");
     quizzCard.classList.add("quizz")
     const quizzTitle = `<p class ="quizzes-names typography">(${quizz.title})</p>`
     let quizzSpace = document.querySelector(".quizzes")
     quizzCard.innerHTML= `${image} ${quizzTitle}`
-    quizz.onclick = function (){
+    quizzCard.onclick = function (){
         startquizz(quizz.id)
     }
     quizzSpace.appendChild(quizzCard)
