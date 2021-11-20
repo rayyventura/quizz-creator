@@ -53,64 +53,70 @@ function getQuizz(quizzId){
 
 
 let countquizz = [0,0];
-let levelinfo;
+let levelinfo, idquizz;
 function startquizz(id){
+    
     document.querySelector(".main-screen").classList.add("minimize");
     document.querySelector(".quizz-screen").classList.remove("minimize");
 
-    let number_question = [0, 1, 2, 3];
-    number_question.sort(()=> (Math.random() - 0.5));
+    idquizz = id;
+    countquizz = [0,0];
+    let number_question = [];
+    //number_question.sort(()=> (Math.random() - 0.5));
    
-    const quizz = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${1}`);
+    const quizz = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`);
 
     quizz.then((answer)=>{
+        
         const screen = document.querySelector(".quizz-screen");
+
         let header = screen.querySelector(".title-quizz");
         header.innerHTML = `
             <img src="${answer.data.image}"/>
             <div class="shadow"></div>
             <p>${answer.data.title}</p>
         `;
-        questions = answer.data.questions;
+
+        let questions = answer.data.questions;
         let areaquestion = document.querySelector(".container-quizz");
+
         areaquestion.innerHTML = "";
         let answerresult = [];
         countquizz[1] = questions.length;
+
         for(let i = 0; i< questions.length; i++){
+            number_question=[];
+
+            areaquestion.innerHTML += `
+                <div class="box-quizz">
+                    <div class="question">${questions[i].title}</div>
+                    <div class="options">                        
+                    </div>
+                </div>
+            `;
+            
+            for(let j=0; j< questions[i].answers.length; j++){
+                number_question.push(j);  
+            }
             number_question.sort(()=> (Math.random() - 0.5));
-            for(let j=0; j< 4; j++){
+
+            for(let j=0; j< questions[i].answers.length; j++){
                 if(questions[i].answers[number_question[j]].isCorrectAnswer){
                     answerresult[j] = "right";
                 }else{
                     answerresult[j] = "wrong";
-                }
+                }  
             }
-            console.log(questions[i].answers[number_question[0]].image);
-            areaquestion.innerHTML += `
-                <div class="box-quizz">
-                    <div class="question">${questions[i].title}</div>
-                    <div class="options">
 
-                        <div class="answer ${answerresult[0]}" onclick="cardselected(this,${questions[i].answers[number_question[0]].isCorrectAnswer})">
-                            <img src="${questions[i].answers[number_question[0]].image}"/>
-                            <p>${questions[i].answers[number_question[0]].text}</p>
-                        </div>
-                        <div class="answer ${answerresult[1]}" onclick="cardselected(this,${questions[i].answers[number_question[1]].isCorrectAnswer})">
-                            <img src="${questions[i].answers[number_question[1]].image}"/>
-                            <p>${questions[i].answers[number_question[1]].text}</p>
-                        </div>
-                        <div class="answer ${answerresult[2]}" onclick="cardselected(this,${questions[i].answers[number_question[2]].isCorrectAnswer})">
-                            <img src="${questions[i].answers[number_question[2]].image}"/>
-                            <p>${questions[i].answers[number_question[2]].text}</p>
-                        </div>
-                        <div class="answer ${answerresult[3]}" onclick="cardselected(this,${questions[i].answers[number_question[3]].isCorrectAnswer})">
-                            <img src="${questions[i].answers[number_question[3]].image}"/>
-                            <p>${questions[i].answers[number_question[3]].text}</p>
-                        </div>
-                        
+            const localanswers = document.querySelectorAll(".options");
+            for(let j=0; j< questions[i].answers.length; j++){
+                localanswers[i].innerHTML +=`
+                    <div class="answer ${answerresult[j]}" onclick="cardselected(this,${questions[i].answers[number_question[j]].isCorrectAnswer})">
+                        <img src="${questions[i].answers[number_question[j]].image}"/>
+                        <p>${questions[i].answers[number_question[j]].text}</p>
                     </div>
-                </div>
-            `; 
+                `;
+            } 
         }
         levelinfo = answer.data.levels;
     });
@@ -144,16 +150,17 @@ function cardselected(button, correct){
 }
 
 function resultcalc(){
-    
+    console.log(levelinfo);
     setTimeout(()=>{
         const resultarea = document.querySelector(".container-quizz");
         let result = Math.round((countquizz[0]/countquizz[1])*100);
-        let level;
+        let level = 0;
         for(let i = 0; i <levelinfo.length; i++ ){
             if(result > levelinfo[i].minValue){
                 level = i;
             }
         }
+       
         resultarea.innerHTML+= `
             <div class="box-result">
                 <div class="result">${result}% de acerto: ${levelinfo[level].title}</div>
@@ -167,4 +174,14 @@ function resultcalc(){
         document.querySelector(".box-result").scrollIntoView();
         
     }, 2000);
+}
+
+function restartquizz(){
+    startquizz(idquizz);
+    document.querySelector(".title-quizz").scrollIntoView();
+    
+}
+function backhome(){
+    document.querySelector(".main-screen").classList.remove("minimize");
+    document.querySelector(".quizz-screen").classList.add("minimize");
 }

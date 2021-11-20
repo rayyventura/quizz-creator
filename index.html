@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
+
     <title>BuzzQuizz</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta charset="UTF-8">
+    
     <link rel="shortcut icon" href="assets/buzzquizz.png" type="image/x-icon">
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/estilos.css" /> 
@@ -19,11 +22,11 @@
   </header>
   <main class="main-content">
 
-   <div class="main-screen ">
+    <div class="main-screen ">
      <div class ="created-quizzes">
        <div class="conceived-quizzes">
           <p class ="all-quizzes your-quizzes"> Seus Quizzes </p>
-          <button class= "button-add" onclick="startquizz(1)">
+          <button class= "button-add" onclick="startquizz(3)">
             <img class="add-vector" src = "assets\vector-add.svg" alt= "Button thats allows you to create more quizzes">
           </button>
         </div>
@@ -53,7 +56,7 @@
       </div>      
 
       <div class="quizzes">
-        <div class="quizz" data-identifier="quizz-card" onclick="startquizz(2)">
+        <div class="quizz" data-identifier="quizz-card" onclick="startquizz(1)">
           <p class = "quizzes-names typography">lallwmdlwmff</p>
         </div>
         <div class="quizz" data-identifier="quizz-card"  >
@@ -137,93 +140,94 @@
 
       </div>
       <div class="area-buttons">
-        <button class="restart">Reiniciar Quizz</button>
-        <p class="back-home">Voltar para home</p>
+        <button class="restart" onclick="restartquizz()">Reiniciar Quizz</button>
+        <p class="back-home" onclick="backhome()">Voltar para home</p>
       </div>
     </div>
 
-  <div class="quizz-creation minimize">
-      <div class="basic-info minimize">
+    <div class="quizz-creation minimize">
+        <div class="basic-info minimize">
+          <div class="quizz-title">
+              Comece pelo começo
+          </div>
+          <div class="input-infos">
+              <input type="text" placeholder="Título do seu quizz">
+              <input type="text" placeholder="URL da imagem do seu quizz">
+              <input type="text" placeholder="Quantidade de perguntas do quizz">
+              <input type="text" placeholder="Quantidade de níveis do quizz">
+          </div>
+          <button class="button-submit" onclick="tirarPag()">Prosseguir pra criar perguntas</button>
+    </div>
+    <div class="quizz-questions minimize">
         <div class="quizz-title">
-            Comece pelo começo
+            Crie suas perguntas
+        </div>
+        <div class="input-infos ">
+            <div class="questions-title">Pergunta 1</div>
+                <input type="text" placeholder="Texto da pergunta">
+                <input type="text" placeholder="Cor de fundo da pergunta">
+            <div class="questions-title">Resposta Correta</div>
+                <input type="text" placeholder="Resposta correta">
+                <input type="text" placeholder="URL da imagem">
+            <div class="questions-title">Respostas Incorretas</div>
+                <input type="text" placeholder="Resposta incorreta 1">
+                <input type="text" placeholder="URL da imagem 1">
+            <div class="uncorrect-answer"></div>
+                <input type="text" placeholder="Resposta incorreta 2">
+                <input type="text" placeholder="URL da imagem 2">
+            <div class="uncorrect-answer">  </div>
+                <input type="text" placeholder="Resposta incorreta 3">
+                <input type="text" placeholder="URL da imagem 3">
+            </div>
+            <div class="Perguntas">
+                <div class="pergunta">
+                    <p>Pergunta 2</p>
+                    <img src="assets/Vector (1).svg" alt="lápis">
+                </div>
+                <div class="pergunta">
+                    <p>Pergunta 3</p>
+                    <img src="assets/Vector (1).svg" alt="lápis">
+                </div>
+            </div>
+            <button class="button-submit" onclick="tirarPag2()">Prosseguir pra criar níveis</button>
+    </div>
+    <div class="level-page minimize">
+        <div class="quizz-title">
+            Agora decida os níves
         </div>
         <div class="input-infos">
-            <input type="text" placeholder="Título do seu quizz">
-            <input type="text" placeholder="URL da imagem do seu quizz">
-            <input type="text" placeholder="Quantidade de perguntas do quizz">
-            <input type="text" placeholder="Quantidade de níveis do quizz">
+            <div class="questions-title">Pergunta 1</div>
+            <input type="text" placeholder="Título do nível">
+            <input type="text" placeholder="% de acerto mínima">
+            <input type="text" placeholder="URL da imagem do nível">
+            <input class='oi' type="text" placeholder="Descrição do nível">
         </div>
-        <button class="button-submit" onclick="tirarPag()">Prosseguir pra criar perguntas</button>
-  </div>
-  <div class="quizz-questions minimize">
-      <div class="quizz-title">
-          Crie suas perguntas
-      </div>
-      <div class="input-infos ">
-          <div class="questions-title">Pergunta 1</div>
-              <input type="text" placeholder="Texto da pergunta">
-              <input type="text" placeholder="Cor de fundo da pergunta">
-          <div class="questions-title">Resposta Correta</div>
-              <input type="text" placeholder="Resposta correta">
-              <input type="text" placeholder="URL da imagem">
-          <div class="questions-title">Respostas Incorretas</div>
-              <input type="text" placeholder="Resposta incorreta 1">
-              <input type="text" placeholder="URL da imagem 1">
-          <div class="uncorrect-answer"></div>
-              <input type="text" placeholder="Resposta incorreta 2">
-              <input type="text" placeholder="URL da imagem 2">
-          <div class="uncorrect-answer">  </div>
-              <input type="text" placeholder="Resposta incorreta 3">
-              <input type="text" placeholder="URL da imagem 3">
-          </div>
-          <div class="Perguntas">
-              <div class="pergunta">
-                  <p>Pergunta 2</p>
-                  <img src="assets/Vector (1).svg" alt="lápis">
-              </div>
-              <div class="pergunta">
-                  <p>Pergunta 3</p>
-                  <img src="assets/Vector (1).svg" alt="lápis">
-              </div>
-          </div>
-          <button class="button-submit" onclick="tirarPag2()">Prosseguir pra criar níveis</button>
-  </div>
-  <div class="level-page minimize">
-      <div class="quizz-title">
-          Agora decida os níves
-      </div>
-      <div class="input-infos">
-          <div class="questions-title">Pergunta 1</div>
-          <input type="text" placeholder="Título do nível">
-          <input type="text" placeholder="% de acerto mínima">
-          <input type="text" placeholder="URL da imagem do nível">
-          <input class='oi' type="text" placeholder="Descrição do nível">
-      </div>
-      <div class="Perguntas">
-          <div class="pergunta">
-              <p>Nivel 2</p>
-              <img src="assets/Vector (1).svg" alt="lápis">
-          </div>
-          <div class="pergunta">
-              <p>Nivel 3</p>
-              <img src="assets/Vector (1).svg" alt="lápis">
-          </div>
-      </div>
-      <button class="button-submit" onclick="tirarPag3()">Finalizar Quizz</button>
-  </div>
-  <div class="final-page minimize">
-      <div class="quizz-title">
-          Seu quizz está pronto
-      </div>
-      <div class="done-quizz"> <img src="assets/download.jpg" alt="Imagem com o quizz que vou puxar do AXIOS"></div>
-      <button class="button-submit" onclick="tirarPag4()">Acessar quizz</button>
-  </div>
-</div>
+        <div class="Perguntas">
+            <div class="pergunta">
+                <p>Nivel 2</p>
+                <img src="assets/Vector (1).svg" alt="lápis">
+            </div>
+            <div class="pergunta">
+                <p>Nivel 3</p>
+                <img src="assets/Vector (1).svg" alt="lápis">
+            </div>
+        </div>
+        <button class="button-submit" onclick="tirarPag3()">Finalizar Quizz</button>
+    </div>
+    <div class="final-page minimize">
+        <div class="quizz-title">
+            Seu quizz está pronto
+        </div>
+        <div class="done-quizz"> <img src="assets/download.jpg" alt="Imagem com o quizz que vou puxar do AXIOS"></div>
+        <button class="button-submit" onclick="tirarPag4()">Acessar quizz</button>
+    </div>
+    </div>
+
   </main>
   <footer class="footer">
   </footer>
-  
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>    
-    <script src="Javascript/scripts.js"> </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>    
+  <script src="Javascript/scripts.js"> </script>
        
 </body>
