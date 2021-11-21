@@ -284,6 +284,7 @@ if(idDiserial!==null){
     if(idDiserial.length>0){
         const addMore = document.querySelector('.add-more');
         const ownQuizzes=document.querySelector(".upper-box");
+        ownQuizzes.innerHTML='';
         ownQuizzes.classList.add('distance');
        
         addMore.innerHTML=`<div class="top">
@@ -294,7 +295,7 @@ if(idDiserial!==null){
         for(let i=0; i<idDiserial.length;i++){
             const promise = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${idDiserial[i]}`);
                 promise.then((response)=>{
-                ownQuizzes.innerHTML=` <div onclick="accessQuizz(${idDiserial[i]})" class='visualize-quizz' style='background-image: 
+                ownQuizzes.innerHTML+=` <div onclick="accessQuizz(${idDiserial[i]})" class='visualize-quizz' style='background-image: 
                 linear-gradient(to top, black, transparent), url(${response.data.image})'> ;
                 <p>${response.data.title}</p>
                 </div>`

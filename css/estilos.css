@@ -538,12 +538,11 @@ input.question-color{
     input.level-description{
         height: 100px;
     }
-
 }
 @media (max-width:759px) {
     .button-submit{
-        font-size: 22px;
-        width: 280px;
+        font-size: 18px;
+        width: 255px;
         height: 44px;
     }
     .input-infos{
@@ -636,5 +635,15 @@ input.question-color{
     }
     .pergunta,.level{
         height:44px;
+    }
+    .visualize-quizz{
+    background-size: 340px 180px;
+    background-position: center;
+    width: 340px;
+    height: 181px;
+   
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    word-break: break-all;  
+    line-height: 23px;
     }
 }
