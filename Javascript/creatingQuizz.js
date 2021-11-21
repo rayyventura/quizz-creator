@@ -3,15 +3,12 @@ const quizzQuestions = document.querySelector('.quizz-questions');
 const quizzLevels = document.querySelector('.level-page');
 const mainScreen = document.querySelector('.main-screen');
 const finalPage = document.querySelector('.final-page');
-const quizz = {};
-
-const numberInfos={
-leastPercentage: false,
-questionNumber : 0,
-levelNumber : 0,
-numQuestions : 0,
-numLevels : 0
-}
+let quizz = {};
+let questions=[];
+let levels=[];
+let quizztitle='';
+let quizzimage='';
+let numberInfos={leastPercentage: false, questionNumber : 0, levelNumber : 0,numQuestions : 0,numLevels : 0}
 
 
 const createQuizz=()=>{
@@ -46,8 +43,8 @@ const  startInformation =()=>{
         numberInfos.numQuestions=pickQuestionsNº;
         numberInfos.numLevels=pickLevelsNº;
 
-        quizz.title=pickTitle;
-        quizz.image=pickImage;
+        quizztitle=pickTitle;
+        quizzimage=pickImage;
     }
 }
 const createQuestions = (numberQuestions) =>{
@@ -105,20 +102,17 @@ const  validateQuestions = () =>{
         const wrongAnswer2 = document.querySelectorAll(".wrong-answer2")[i];
         const imageAnswer3 = document.querySelectorAll(".image-answer3")[i];
         const wrongAnswer3 = document.querySelectorAll(".wrong-answer3")[i];
+        
                 if(wrongAnswer2 !== ''  || wrongAnswer3 !== ''){
                     if(wrongAnswer2.value !== '' ){
                         if(!isValidHttpUrl(imageAnswer2.value)){
                             alert(`A resposta 2 da Pergunta ${i+1} não tem uma URL de Imagem válida`);
-                            console.log(wrongAnswer2.value);
-                            
                             return;
                         }
                     }
                     if(wrongAnswer3.value !== '' ){
                         if(!isValidHttpUrl(imageAnswer3.value)){
                             alert(`A resposta 3 da Pergunta ${i+1} não tem uma URL de Imagem válida`);
-                            console.log(wrongAnswer3.value);
-                            console.log('true');
                             return;
                         }
                         
@@ -143,7 +137,39 @@ const  validateQuestions = () =>{
                     formados por números ou letras de A a F`);
                     return;
                 }
+
+                questions[i]={
+                    title: questionText.value,
+                    color: questionColor.value,
+                    answers: [
+                        {
+                            text:correctAnswer.value,
+                            image:imageCorrectAnswer.value,
+                            isCorrectAnswer:true
+                        },
+                        {
+                            text:wrongAnswer1.value,
+                            image:imageAnswer1.value,
+                            isCorrectAnswer:false
+                        }
+                    ]
+                }
+                if(wrongAnswer2!==''){
+                    questions[i].answers.push({
+                            text:wrongAnswer2.value,
+                            image:imageAnswer2.value,
+                            isCorrectAnswer:false
+                    });
+                }
+                if(wrongAnswer3!==''){
+                    questions[i].answers.push({
+                            text:wrongAnswer3.value,
+                            image:imageAnswer3.value,
+                            isCorrectAnswer:false
+                    });
+                }
         }
+       
         quizzQuestions.classList.add("minimize");
         quizzLevels.classList.remove("minimize");
           createLevels();
@@ -183,16 +209,18 @@ const validateLevels = () =>{
         const levelImage = document.querySelectorAll(".level-image")[i];
         const levelDescription = document.querySelectorAll(".level-description")[i];
         levelPercentage.value=parseInt(levelPercentage.value);
-        
-        if(levelPercentage.value==0){
-            numberInfos.leastPercentage = true;    
+        for( let i=0; i<numberInfos.numLevels;i++){
+            levelPercentage = document.querySelectorAll(".level-percentage")[i];
+            levelPercentage.value=parseInt(levelPercentage.value);
+            if(levelPercentage.value==0){
+                numberInfos.leastPercentage = true;    
+            }
         }
         if(levelTitle.value.length<10){
             alert(`Título do Nível ${i+1} deve ter pelo menos 10 caracteres`);
             return;
         }else if(levelPercentage.value<0 || levelPercentage.value>100 || isNaN(levelPercentage.value)){
             alert(` A porcentagem deve ser um número entre 0 e 100, incluindo-os`);
-            console.log(levelPercentage.value);
             return;
         }else if(!isValidHttpUrl(levelImage.value)){
             alert(`A URL da questão ${i+1} não é válida`);
@@ -202,16 +230,64 @@ const validateLevels = () =>{
             com pelo menos 30 Caracteres `);
             return;
         }
+        if(!numberInfos.leastPercentage){
+            alert(`É obrigatório existir pelo menos 1 nível cuja % de acerto mínima seja 0%`);
+            return;
+        }
+        levels[i]={
+            title: levelTitle.value,
+            image: levelImage.value,
+            text: levelDescription.value,
+            minValue:levelPercentage.value
+        }
+
     }
-    if(!numberInfos.leastPercentage){
-        alert(`É obrigatório existir pelo menos 1 nível cuja % de acerto mínima seja 0%`);
-        return;
-    }
+        formulateQuizz();
+        sendQuizz();
         quizzLevels.classList.add('minimize');
         finalPage.classList.remove('minimize');
 }
 
+function formulateQuizz(){
+    quizz={
+        title:quizztitle,
+        image:quizzimage,
+        questions,
+        levels
+    }
+}
 
+
+function sendQuizz(){
+    const promise = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes',quizz);
+    promise.then((response) => {
+       let  accessMyQuizz = document.querySelector(".done-quizz");
+       accessMyQuizz.innerHTML+= ` <div onclick="accessQuizz()" class='visualize-quizz' style='background-image: 
+       linear-gradient(to top, black, transparent), url(${response.data.image})'> ;
+       <p>${response.data.title}</p>
+       </div>`
+     
+        id=response.data.id;
+    });
+    promise.catch((response) => {
+        console.log('errado');
+    });
+}
+
+
+const  accessQuizz = () =>{
+    finalPage.classList.add('minimize');
+    startquizz(id);
+}
+const returnHome = () =>{
+    const makeQuestions = document.querySelector('.make-questions');
+     makeQuestions.innerHTML=``;
+     basicInfo.innerHTML=basicInfo.innerHTML;
+     numberInfos.questionNumber=0;
+     numberInfos.levelNumber=0;
+     finalPage.classList.add('minimize');
+     mainScreen.classList.remove('minimize');
+}
 
 function isValidHttpUrl(string) {
     let url;
@@ -225,17 +301,6 @@ function isValidHttpUrl(string) {
     return url.protocol === "http:" || url.protocol === "https:";
   }
   
-const  accessQuizz = () =>{
-    finalPage.classList.add('minimize');
-}
-const returnHome = () =>{
-    const makeQuestions = document.querySelector('.make-questions');
-     makeQuestions.innerHTML=``;
-     numberInfos.questionNumber=0;
-     numberInfos.levelNumber=0;
-     finalPage.classList.add('minimize');
-     mainScreen.classList.remove('minimize');
-}
 
 function isHexColor(color){
     if(/^#[0-9A-F]{6}$/i.test(color)){

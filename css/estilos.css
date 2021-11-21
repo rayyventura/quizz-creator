@@ -378,6 +378,9 @@ body{
     border-radius: 5px;
     
 }
+input.question-color{
+    cursor: pointer;
+}
 ::-webkit-input-placeholder {
     font-style: italic;
     font-family: 'Roboto';
@@ -460,9 +463,38 @@ body{
    display: flex;
    justify-content: center;
 }
+
 .done-quizz img{
     width: 35%;
+    height: 266px;
+    cursor:pointer;
 }
+.done-quizz{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.visualize-quizz{
+    width: 500px;
+    height: 266px;
+    background-size: 500px 265px;
+    background-position: center;
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-end;
+    cursor: pointer;
+}
+.visualize-quizz p{
+    font-family: Roboto;
+    font-weight: normal;
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    color: #FFFFFF;
+    margin: 0px 0px 23px 23px;
+}
+
 
 @media(max-width: 1100px){
     ::-webkit-input-placeholder {
