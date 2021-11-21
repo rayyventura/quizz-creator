@@ -63,8 +63,8 @@ function getQuizz(quizzId){
             console.log(result)
         }
     )
-    obtainingAQuiz.catch(function error(){
-        console.log()
+    obtainingAQuiz.catch(function error(fault){
+        console.log(fault)
     }
 )
 
