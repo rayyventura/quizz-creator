@@ -51,6 +51,15 @@ body{
     align-items: center;
     margin-top: 77px;
  }
+ .top{
+     display: flex;
+ }
+ .distance{
+     margin-top: 12px;;
+ }
+ .add-more{
+     padding-top: 120px;
+ }
 .first-line {
     height: 107px;
     width: 250px;
@@ -469,6 +478,10 @@ input.question-color{
     height: 266px;
     cursor:pointer;
 }
+.addSymbol{
+    cursor: pointer;
+    margin-left: 9px;
+}
 .done-quizz{
     display: flex;
     flex-direction: column;
@@ -493,6 +506,16 @@ input.question-color{
     flex-wrap: wrap;
     color: #FFFFFF;
     margin: 0px 0px 23px 23px;
+}
+.upper-box .visualize-quizz{
+    background-size: 340px 180px;
+    background-position: center;
+    width: 340px;
+    height: 181px;
+   
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    word-break: break-all;  
+    line-height: 23px;
 }
 
 

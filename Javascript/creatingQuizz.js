@@ -8,6 +8,7 @@ let questions=[];
 let levels=[];
 let quizztitle='';
 let quizzimage='';
+let getIds=[];
 let numberInfos={leastPercentage: false, questionNumber : 0, levelNumber : 0,numQuestions : 0,numLevels : 0}
 
 
@@ -266,16 +267,45 @@ function sendQuizz(){
        linear-gradient(to top, black, transparent), url(${response.data.image})'> ;
        <p>${response.data.title}</p>
        </div>`
-     
         id=response.data.id;
+        getIds.push(response.data.id);
+        const temporaryId = JSON.stringify(getIds);
+        localStorage.setItem("Ids",temporaryId);
+        atualizeQuizzes();
     });
     promise.catch((response) => {
         console.log('errado');
     });
 }
+function atualizeQuizzes(){
+    const idSerial = localStorage.getItem("Ids");
+    const idDiserial = JSON.parse(idSerial);
+if(idDiserial!==null){
+    if(idDiserial.length>0){
+        const addMore = document.querySelector('.add-more');
+        const ownQuizzes=document.querySelector(".upper-box");
+        ownQuizzes.classList.add('distance');
+       
+        addMore.innerHTML=`<div class="top">
+        <p class="all-quizzes">Seus Quizzes</p>
+        <img class="addSymbol" onclick="createQuizz()" src="assets/Frame 1.svg" alt="">
+        </div>
+        `
+        for(let i=0; i<idDiserial.length;i++){
+            const promise = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${idDiserial[i]}`);
+                promise.then((response)=>{
+                ownQuizzes.innerHTML=` <div onclick="accessQuizz(${idDiserial[i]})" class='visualize-quizz' style='background-image: 
+                linear-gradient(to top, black, transparent), url(${response.data.image})'> ;
+                <p>${response.data.title}</p>
+                </div>`
+            })
+        }
+    }
+}
+}
+atualizeQuizzes();
 
-
-const  accessQuizz = () =>{
+const  accessQuizz = (id) =>{
     finalPage.classList.add('minimize');
     startquizz(id);
 }
