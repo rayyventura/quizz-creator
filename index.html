@@ -117,7 +117,7 @@
       </div>
     </div>
 
-  <div class="quizz-creation">
+  <div class="quizz-creation ">
       <div class="basic-info minimize">
         <div class="quizz-title">
             Comece pelo começo
@@ -151,7 +151,7 @@
 
          </div>
       </div>
-      <button class="button-submit" onclick="showFinalPage()">Finalizar Quizz</button>
+      <button class="button-submit" onclick="validateLevels()">Finalizar Quizz</button>
   </div>
   <div class="final-page minimize">
       <div class="quizz-title">
@@ -159,7 +159,7 @@
       </div>
       <div class="done-quizz"> <img src="assets/download.jpg" alt="Imagem com o quizz que vou puxar do AXIOS"></div>
       <button class="button-submit" onclick="accessQuizz()">Acessar quizz</button>
-      <div class="return-home" oncanplay="returnHome()">Voltar para Home</div>
+      <div class="return-home" onclick="returnHome()">Voltar para Home</div>
   </div>
 </div>
   </main>
@@ -168,5 +168,7 @@
   
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>    
     <script src="Javascript/scripts.js"> </script>
+    <script src="Javascript/creatingQuizz.js"> </script>
        
 </body>
+</html>
