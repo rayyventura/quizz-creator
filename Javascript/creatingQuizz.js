@@ -51,42 +51,43 @@ const  startInformation =()=>{
 }
 const createQuestions = (numberQuestions) =>{
     let defineQuestions = document.querySelector('.Perguntas');
-  
+    
     for(let i=0; i<numberQuestions;i++){
         defineQuestions.innerHTML +=`
-        <div class="input-questions " onclick="loadQuestions(this)">
-            <div class="pergunta">
-                <p>Pergunta ${i+1}</p>
-                <img src="assets/Vector (1).svg" alt="lápis">
+        <div class="input-questions" onclick="loadQuestions(this)">
+        <div class="pergunta" >
+        <p>Pergunta ${i+1}</p>
+        <img src="assets/Vector (1).svg" alt="lápis">
             </div>
         </div>
-                `
-            }
+        <div class="make-questions minimize">
+            <div class="input-infos ">
+                <div class="questions-title">Pergunta ${i+1}</div>
+                <input class='question-text' type="text" placeholder="Texto da pergunta">
+                <div class="questions-title">Escolha a cor de fundo da pergunta</div>
+                <input type="color" class="question-color" placeholder="Cor de fundo da pergunta">
+                <div class="questions-title">Resposta Correta</div>
+                <input class='correct-answer' type="text" placeholder="Resposta correta">
+                <input class='image-correct-answer'type="text" placeholder="URL da imagem">
+                <div class="questions-title">Respostas Incorretas</div>
+                <input class='wrong-answer1' type="text" placeholder="Resposta incorreta 1">
+                <input class='image-answer1' type="text" placeholder="URL da imagem 1">
+                <div class="uncorrect-answer"></div>
+                <input class='wrong-answer2' type="text" placeholder="Resposta incorreta 2">
+                <input class='image-answer2' type="text" placeholder="URL da imagem 2">
+                <div class="uncorrect-answer">  </div>
+                <input class='wrong-answer3' type="text" placeholder="Resposta incorreta 3">
+                <input class='image-answer3' type="text" placeholder="URL da imagem 3">
+            </div>
+         </div>  `
+    }
   }
         
   const loadQuestions = (question) => {
       question.classList.add('minimize');
+      const makeQuestions = document.querySelectorAll(".make-questions");
+      makeQuestions[ numberInfos.questionNumber].classList.remove('minimize');
       numberInfos.questionNumber++;
-     const makeQuestions = document.querySelector('.make-questions');
-     makeQuestions.innerHTML+=`
-    <div class="input-infos ">
-        <div class="questions-title">Pergunta ${numberInfos.questionNumber}</div>
-        <input class='question-text' type="text" placeholder="Texto da pergunta">
-        <div class="questions-title">Escolha a cor de fundo da pergunta</div>
-        <input type="color" class="question-color" placeholder="Cor de fundo da pergunta">
-        <div class="questions-title">Resposta Correta</div>
-        <input class='correct-answer' type="text" placeholder="Resposta correta">
-        <input class='image-correct-answer'type="text" placeholder="URL da imagem">
-        <div class="questions-title">Respostas Incorretas</div>
-        <input class='wrong-answer1' type="text" placeholder="Resposta incorreta 1">
-        <input class='image-answer1' type="text" placeholder="URL da imagem 1">
-        <div class="uncorrect-answer"></div>
-        <input class='wrong-answer2' type="text" placeholder="Resposta incorreta 2">
-        <input class='image-answer2' type="text" placeholder="URL da imagem 2">
-        <div class="uncorrect-answer">  </div>
-        <input class='wrong-answer3' type="text" placeholder="Resposta incorreta 3">
-        <input class='image-answer3' type="text" placeholder="URL da imagem 3">
-    </div>`
 }
 
 
@@ -156,20 +157,21 @@ const  validateQuestions = () =>{
                         }
                     ]
                 }
-                if(wrongAnswer2!==''){
-                    questions[i].answers.push({
-                            text:wrongAnswer2.value,
-                            image:imageAnswer2.value,
-                            isCorrectAnswer:false
-                    });
-                }
-                if(wrongAnswer3!==''){
-                    questions[i].answers.push({
-                            text:wrongAnswer3.value,
-                            image:imageAnswer3.value,
-                            isCorrectAnswer:false
-                    });
-                }
+                
+                 if(wrongAnswer2.value!==''){
+                     questions[i].answers.push({
+                             text:wrongAnswer2.value,
+                             image:imageAnswer2.value,
+                             isCorrectAnswer:false
+                     });
+                 }
+                 if(wrongAnswer3.value!==''){
+                     questions[i].answers.push({
+                             text:wrongAnswer3.value,
+                             image:imageAnswer3.value,
+                             isCorrectAnswer:false
+                     });
+                 }
         }
        
         quizzQuestions.classList.add("minimize");
@@ -187,22 +189,24 @@ const createLevels = ()=>{
                 <p>Nivel ${i+1}</p>
                 <img src="assets/Vector (1).svg" alt="lápis">
             </div>
+        </div>
+        <div class="make-levels minimize">
+            <div class="input-infos">
+                <div class="questions-title">Nível ${i+1}</div>
+                <input class='level-title' type="text" placeholder="Título do nível">
+                <input class='level-percentage'type="text" placeholder="% de acerto mínima">
+                <input class='level-image'type="text" placeholder="URL da imagem do nível">
+                <input class='level-description' type="text" placeholder="Descrição do nível">
+            </div>
         </div>`
     }
 }
 
-const loadLevels = (level) =>{
-    numberInfos.levelNumber++;
+const loadLevels = (level) =>{   
     level.classList.add('minimize');
-    let makeLevels = document.querySelector('.make-levels');
-    makeLevels.innerHTML+=
-    `<div class="input-infos">
-        <div class="questions-title">Nível ${numberInfos.levelNumber}</div>
-        <input class='level-title' type="text" placeholder="Título do nível">
-        <input class='level-percentage'type="text" placeholder="% de acerto mínima">
-        <input class='level-image'type="text" placeholder="URL da imagem do nível">
-        <input class='level-description' type="text" placeholder="Descrição do nível">
-    </div>`
+    let makeLevels = document.querySelectorAll('.make-levels');
+    makeLevels[numberInfos.levelNumber].classList.remove("minimize");
+    numberInfos.levelNumber++;
 }
 const validateLevels = () =>{
     for(let i=0; i<numberInfos.numLevels;i++){
@@ -245,6 +249,8 @@ const validateLevels = () =>{
 
     }
         formulateQuizz();
+        console.log('Eu sou o quizz');
+        console.log(quizz);
         sendQuizz();
         quizzLevels.classList.add('minimize');
         finalPage.classList.remove('minimize');
@@ -268,7 +274,7 @@ function sendQuizz(){
        let  accessMyQuizz = document.querySelector(".done-quizz");
        let buttonSubmit = document.querySelector('.finalButton');
        buttonSubmit.innerHTML=`<button class="button-submit" onclick="accessQuizz(${id})">Acessar quizz</button>`
-    
+        accessMyQuizz.innerHTML=``;
        accessMyQuizz.innerHTML+= ` <div onclick="accessQuizz(${id})" class='visualize-quizz' style='background-image: 
        linear-gradient(to top, black, transparent), url(${response.data.image})'> ;
        <p>${response.data.title}</p>
@@ -280,7 +286,7 @@ function sendQuizz(){
         atualizeQuizzes();
     });
     promise.catch((response) => {
-        console.log(response.data);
+        console.log(response);
     });
 }
 function atualizeQuizzes(){
@@ -325,10 +331,14 @@ const  accessQuizz = (id) =>{
     startquizz(id);
 }
 const returnHome = () =>{
-    const makeQuestions = document.querySelector('.make-questions');
-    const makeLevels = document.querySelector('.make-levels');
-     makeQuestions.innerHTML=``;
-     makeLevels.innerHTML=``;
+    const makeQuestions = document.querySelectorAll('.make-questions');
+    const makeLevels = document.querySelectorAll('.make-levels');
+    for(let i=0; i<makeQuestions.length;i++){
+        makeQuestions[i].remove();
+    }
+    for(let i=0; i<makeLevels.length;i++){
+        makeLevels[i].remove();
+    }
      basicInfo.innerHTML=basicInfo.innerHTML;
      numberInfos.questionNumber=0;
      numberInfos.levelNumber=0;

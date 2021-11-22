@@ -88,12 +88,7 @@ body{
     padding-top: 77px;
     color: #000000;
 }
-.first-page-body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+
 .all-quizzes{
     font-size: 20px;
     font-style: normal;
