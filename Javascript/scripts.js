@@ -5,7 +5,7 @@ function showingQuizzLayout (quizz){
     const image = `<img class="img-layout" src ="${quizz.image}">`
     quizzCard.setAttribute("data-identifier","quizz-card");
     quizzCard.classList.add("quizz")
-    const quizzTitle = `<p class ="quizzes-names typography">(${quizz.title})</p>`
+    const quizzTitle = `<p class ="quizzes-names typography">${quizz.title}</p>`
     let quizzSpace = document.querySelector(".quizzes")
     quizzCard.innerHTML= `${colors} ${image} ${quizzTitle}`
     quizzCard.onclick = function (){
