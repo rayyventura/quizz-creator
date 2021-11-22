@@ -4,6 +4,7 @@ const quizzLevels = document.querySelector('.level-page');
 const mainScreen = document.querySelector('.main-screen');
 const finalPage = document.querySelector('.final-page');
 let quizz = {};
+let id;
 let questions=[];
 let levels=[];
 let quizztitle='';
@@ -260,49 +261,62 @@ function formulateQuizz(){
 
 
 function sendQuizz(){
+    console.log(quizz);
     const promise = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes',quizz);
     promise.then((response) => {
+        id=response.data.id;
        let  accessMyQuizz = document.querySelector(".done-quizz");
-       accessMyQuizz.innerHTML+= ` <div onclick="accessQuizz()" class='visualize-quizz' style='background-image: 
+       let buttonSubmit = document.querySelector('.finalButton');
+       buttonSubmit.innerHTML=`<button class="button-submit" onclick="accessQuizz(${id})">Acessar quizz</button>`
+    
+       accessMyQuizz.innerHTML+= ` <div onclick="accessQuizz(${id})" class='visualize-quizz' style='background-image: 
        linear-gradient(to top, black, transparent), url(${response.data.image})'> ;
        <p>${response.data.title}</p>
        </div>`
-        id=response.data.id;
+        getIds = JSON.parse(localStorage.getItem("Ids"));
         getIds.push(response.data.id);
         const temporaryId = JSON.stringify(getIds);
         localStorage.setItem("Ids",temporaryId);
         atualizeQuizzes();
     });
     promise.catch((response) => {
-        console.log('errado');
+        console.log(response.data);
     });
 }
 function atualizeQuizzes(){
     const idSerial = localStorage.getItem("Ids");
     const idDiserial = JSON.parse(idSerial);
-if(idDiserial!==null){
-    if(idDiserial.length>0){
-        const addMore = document.querySelector('.add-more');
-        const ownQuizzes=document.querySelector(".upper-box");
-        ownQuizzes.innerHTML='';
-        ownQuizzes.classList.add('distance');
-       
-        addMore.innerHTML=`<div class="top">
-        <p class="all-quizzes">Seus Quizzes</p>
-        <img class="addSymbol" onclick="createQuizz()" src="assets/Frame 1.svg" alt="">
-        </div>
-        `
-        for(let i=0; i<idDiserial.length;i++){
-            const promise = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${idDiserial[i]}`);
-                promise.then((response)=>{
-                ownQuizzes.innerHTML+=` <div onclick="accessQuizz(${idDiserial[i]})" class='visualize-quizz' style='background-image: 
-                linear-gradient(to top, black, transparent), url(${response.data.image})'> ;
-                <p>${response.data.title}</p>
-                </div>`
-            })
+    console.log(idDiserial);
+    if(idDiserial!==null){
+        if(idDiserial.length>0){
+            const addMore = document.querySelector('.add-more');
+            const ownQuizzes=document.querySelector(".upper-box");
+            const noQuizzYet = document.querySelector('.first-line');
+            const quizzCreateButton = document.querySelector('.create-quizz');
+            noQuizzYet.classList.add('minimize');
+            quizzCreateButton.classList.add('minimize');
+            ownQuizzes.classList.add('distance');
+           
+            addMore.innerHTML=`<div class="top">
+            <p class="all-quizzes">Seus Quizzes</p>
+            <img class="addSymbol" onclick="createQuizz()" src="assets/Frame 1.svg" alt="">
+            </div>
+            `
+            for(let i=0; i<idDiserial.length;i++){
+                const promise = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${idDiserial[i]}`);
+                    promise.then((response)=>{
+                    ownQuizzes.innerHTML +=` <div onclick="accessQuizz(${idDiserial[i]})" class='visualize-quizz' style='background-image: 
+                    linear-gradient(to top, black, transparent), url(${response.data.image})'> 
+                    <p>${response.data.title}</p>
+                    </div>`  
+                     });
+                     promise.catch((response)=>{
+                         console.log("erro-meu quizz");
+                     });   
+            }
         }
     }
-}
+
 }
 atualizeQuizzes();
 
@@ -312,7 +326,9 @@ const  accessQuizz = (id) =>{
 }
 const returnHome = () =>{
     const makeQuestions = document.querySelector('.make-questions');
+    const makeLevels = document.querySelector('.make-levels');
      makeQuestions.innerHTML=``;
+     makeLevels.innerHTML=``;
      basicInfo.innerHTML=basicInfo.innerHTML;
      numberInfos.questionNumber=0;
      numberInfos.levelNumber=0;
