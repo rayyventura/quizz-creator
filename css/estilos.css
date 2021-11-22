@@ -132,7 +132,6 @@ body{
     
 }
 .new-quizzes{
-   
     display:flex;
     flex-wrap: nowrap;
 }
@@ -143,12 +142,20 @@ body{
     width: 340px;
     
 }
+.color-changes{
+    width:340px;
+    height:181px;
+    border-radius:5px;
+    position:absolute;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
+}
 .img-layout{
     height: 181px;
     width: 340px;
     border-radius: 5px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
     cursor: pointer;
+    
 }
 
 .quizzes-names{
@@ -176,6 +183,8 @@ body{
     line-height: 22px;
     letter-spacing: 0em;
     text-align: left;
+    z-index: 1;
+    position: absolute;
 }
 .quizz-screen{
     width: 100%;
