@@ -11,7 +11,13 @@ function showingQuizzLayout (quizz){
     quizzCard.onclick = function (){
         startquizz(quizz.id)
     }
-    quizzSpace.appendChild(quizzCard)
+    quizzSpace.appendChild(quizzCard);
+
+    setTimeout(()=>{
+        document.querySelector(".loading-screen").classList.add("minimize");
+        document.querySelector(".main-screen").classList.remove("minimize");
+    }, 1500);
+
     
 }
 function getQuizzes(){
