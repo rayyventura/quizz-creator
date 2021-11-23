@@ -14,12 +14,8 @@ let numberInfos={leastPercentage: false, questionNumber : 0, levelNumber : 0,num
 
 
 const createQuizz=()=>{
-    document.querySelector(".loading-screen").classList.remove("minimize");
+    basicInfo.classList.remove('minimize');
     mainScreen.classList.add('minimize');
-    setTimeout(()=>{
-        basicInfo.classList.remove('minimize');
-        document.querySelector(".loading-screen").classList.add("minimize");
-    }, 500);
 }
 const  startInformation =()=>{
     const pickTitle = document.querySelector('.pick-title').value;
@@ -58,14 +54,14 @@ const createQuestions = (numberQuestions) =>{
     
     for(let i=0; i<numberQuestions;i++){
         defineQuestions.innerHTML +=`
-        <div class="input-questions" onclick="loadQuestions(this)">
+        <div class="input-questions" onclick="loadQuestions(this)"  data-identifier="expand">
         <div class="pergunta" >
         <p>Pergunta ${i+1}</p>
         <img src="assets/Vector (1).svg" alt="lápis">
             </div>
         </div>
         <div class="make-questions minimize">
-            <div class="input-infos ">
+            <div class="input-infos data-identifier="question"">
                 <div class="questions-title">Pergunta ${i+1}</div>
                 <input class='question-text' type="text" placeholder="Texto da pergunta">
                 <div class="questions-title">Escolha a cor de fundo da pergunta</div>
@@ -83,7 +79,7 @@ const createQuestions = (numberQuestions) =>{
                 <input class='wrong-answer3' type="text" placeholder="Resposta incorreta 3">
                 <input class='image-answer3' type="text" placeholder="URL da imagem 3">
             </div>
-         </div>  `;
+         </div>  `
     }
   }
         
@@ -188,14 +184,14 @@ const createLevels = ()=>{
     let levels = document.querySelector('.Levels');
     for(let i=0; i<numberInfos.numLevels;i++){
         levels.innerHTML+=`
-        <div class='input-questions' onclick='loadLevels(this)'>
+        <div class='input-questions' onclick='loadLevels(this)' data-identifier="expand">
             <div class="level">
                 <p>Nivel ${i+1}</p>
                 <img src="assets/Vector (1).svg" alt="lápis">
             </div>
         </div>
         <div class="make-levels minimize">
-            <div class="input-infos">
+            <div class="input-infos" data-identifier="level">
                 <div class="questions-title">Nível ${i+1}</div>
                 <input class='level-title' type="text" placeholder="Título do nível">
                 <input class='level-percentage'type="text" placeholder="% de acerto mínima">
@@ -275,8 +271,6 @@ function sendQuizz(){
     const promise = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes',quizz);
     promise.then((response) => {
         id=response.data.id;
-       let key = response.data.key;
-       storeKey(id,key);
        let  accessMyQuizz = document.querySelector(".done-quizz");
        let buttonSubmit = document.querySelector('.finalButton');
        buttonSubmit.innerHTML=`<button class="button-submit" onclick="accessQuizz(${id})">Acessar quizz</button>`
@@ -285,46 +279,21 @@ function sendQuizz(){
        linear-gradient(to top, black, transparent), url(${response.data.image})'> ;
        <p>${response.data.title}</p>
        </div>`
-        getIds = JSON.parse(localStorage.getItem("Ids"));
-        getIds.push(response.data.id);
-        const temporaryId = JSON.stringify(getIds);
-        localStorage.setItem("Ids",temporaryId);
+       if(JSON.parse(localStorage.getItem("Ids"))!==null){
+           getIds = JSON.parse(localStorage.getItem("Ids"));
+       }
+       getIds.push(response.data.id);
+       const temporaryId = JSON.stringify(getIds);
+       localStorage.setItem("Ids",temporaryId);
         atualizeQuizzes();
     });
     promise.catch((response) => {
         console.log(response);
     });
 }
-function storeKey(id, key){
-    let gettingKey = localStorage.getItem('key')
-    let keys;
-    if(gettingKey == null){
-        keys = {}
-    }
-    else{
-        keys = JSON.parse(gettingKey)
-    }
-    keys[id] = key 
-    const keysStr = JSON.stringify(keys)
-    localStorage.setItem('key',keysStr)
-}
-function deletQuizzes(id){
-    const gettingKey= localStorage.getItem('key')
-    const keyStorage = JSON.parse(gettingKey)
-    const promise = axios.delete(
-        `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`,
-        {
-            headers: {
-                'Secret-Key':keyStorage[id]
-            }
-        }
-    )
-  
-}
 function atualizeQuizzes(){
     const idSerial = localStorage.getItem("Ids");
     const idDiserial = JSON.parse(idSerial);
-    console.log(idDiserial);
     if(idDiserial!==null){
         if(idDiserial.length>0){
             const addMore = document.querySelector('.add-more');
@@ -334,7 +303,7 @@ function atualizeQuizzes(){
             noQuizzYet.classList.add('minimize');
             quizzCreateButton.classList.add('minimize');
             ownQuizzes.classList.add('distance');
-           
+            ownQuizzes.innerHTML='';
             addMore.innerHTML=`<div class="top">
             <p class="all-quizzes">Seus Quizzes</p>
             <img class="addSymbol" onclick="createQuizz()" src="assets/Frame 1.svg" alt="">
@@ -346,18 +315,14 @@ function atualizeQuizzes(){
                     ownQuizzes.innerHTML +=` <div onclick="accessQuizz(${idDiserial[i]})" class='visualize-quizz' style='background-image: 
                     linear-gradient(to top, black, transparent), url(${response.data.image})'> 
                     <p>${response.data.title}</p>
-                        <div class="settings-quizz">
-                        
-                        </div>
-                    
                     </div>`  
                      });
-                     //<button class="button-submit delete-quizz" onclick="deleteQuizzes(${idDiserial[i]})"> Apagar quizz </button>
                      promise.catch((response)=>{
                          console.log("erro-meu quizz");
                      });   
             }
         }
+        
     }
 
 }
@@ -380,12 +345,8 @@ const returnHome = () =>{
      numberInfos.questionNumber=0;
      numberInfos.levelNumber=0;
      finalPage.classList.add('minimize');
-     document.querySelector(".loading-screnn").classList.remove("minimize");
-    setTimeout(()=>{
-        document.querySelector(".loading-screnn").classList.add("minimize");
-        mainScreen.classList.remove('minimize');
-
-    }, 500);
+     mainScreen.classList.remove('minimize');
+     
 }
 
 function isValidHttpUrl(string) {
@@ -408,4 +369,3 @@ function isHexColor(color){
         return false;
     }
 }
-
