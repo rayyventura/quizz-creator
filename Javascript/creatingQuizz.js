@@ -275,6 +275,8 @@ function sendQuizz(){
     const promise = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes',quizz);
     promise.then((response) => {
         id=response.data.id;
+       let key = response.data.key;
+       storeKey(id,key);
        let  accessMyQuizz = document.querySelector(".done-quizz");
        let buttonSubmit = document.querySelector('.finalButton');
        buttonSubmit.innerHTML=`<button class="button-submit" onclick="accessQuizz(${id})">Acessar quizz</button>`
@@ -292,6 +294,33 @@ function sendQuizz(){
     promise.catch((response) => {
         console.log(response);
     });
+}
+function storeKey(id, key){
+    let gettingKey = localStorage.getItem('key')
+    let keys;
+    if(gettingKey == null){
+        keys = {}
+    }
+    else{
+        keys = JSON.parse(gettingKey)
+    }
+    keys[id] = key 
+    const keysStr = JSON.stringify(keys)
+    localStorage.setItem('key',keysStr)
+}
+function deleteQuizzes(id){
+    const gettingKey= localStorage.getItem('key')
+    const keyStorage = JSON.parse(gettingKey)
+    const promise = axios.delete(
+        `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`,
+        {
+            headers: {
+                'Secret-Key':keyStorage[id]
+            }
+        }
+    )
+    
+
 }
 function atualizeQuizzes(){
     const idSerial = localStorage.getItem("Ids");
@@ -370,3 +399,4 @@ function isHexColor(color){
         return false;
     }
 }
+
