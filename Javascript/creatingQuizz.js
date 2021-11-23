@@ -83,7 +83,7 @@ const createQuestions = (numberQuestions) =>{
                 <input class='wrong-answer3' type="text" placeholder="Resposta incorreta 3">
                 <input class='image-answer3' type="text" placeholder="URL da imagem 3">
             </div>
-         </div>  `
+         </div>  `;
     }
   }
         
@@ -308,7 +308,7 @@ function storeKey(id, key){
     const keysStr = JSON.stringify(keys)
     localStorage.setItem('key',keysStr)
 }
-function deleteQuizzes(id){
+function deletQuizzes(id){
     const gettingKey= localStorage.getItem('key')
     const keyStorage = JSON.parse(gettingKey)
     const promise = axios.delete(
@@ -346,9 +346,13 @@ function atualizeQuizzes(){
                     ownQuizzes.innerHTML +=` <div onclick="accessQuizz(${idDiserial[i]})" class='visualize-quizz' style='background-image: 
                     linear-gradient(to top, black, transparent), url(${response.data.image})'> 
                     <p>${response.data.title}</p>
-                    <button class="button-submit delete-quizz" onclick="deleteQuizzes(${idDiserial[i]})"> Apagar quizz </button>
+                        <div class="settings-quizz">
+                        
+                        </div>
+                    
                     </div>`  
                      });
+                     //<button class="button-submit delete-quizz" onclick="deleteQuizzes(${idDiserial[i]})"> Apagar quizz </button>
                      promise.catch((response)=>{
                          console.log("erro-meu quizz");
                      });   
@@ -376,7 +380,12 @@ const returnHome = () =>{
      numberInfos.questionNumber=0;
      numberInfos.levelNumber=0;
      finalPage.classList.add('minimize');
-     mainScreen.classList.remove('minimize');
+     document.querySelector(".loading-screnn").classList.remove("minimize");
+    setTimeout(()=>{
+        document.querySelector(".loading-screnn").classList.add("minimize");
+        mainScreen.classList.remove('minimize');
+
+    }, 500);
 }
 
 function isValidHttpUrl(string) {

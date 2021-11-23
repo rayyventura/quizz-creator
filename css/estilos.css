@@ -141,6 +141,7 @@ body{
     margin-right: 15px;
     height: 181px;
     width: 340px;
+    position: relative;
     
 }
 .color-changes{
@@ -162,12 +163,11 @@ body{
 }
 
 .quizzes-names{
-    height: 54px;
+    margin: 0px 10px 5px 10px;
     width: 301px;
-    margin-top: -45px;
-    margin-right:21px;
-    margin-left:18px;
     color:#FFFFFF;
+    position: absolute;
+    bottom: 0;
 
 }
 .new-names{
@@ -394,6 +394,26 @@ body{
 
     color: #FF0000;
     font-size: 30px;
+}
+.settings-quizz{
+    width: 43px;
+    height: 87px;
+    background-color: #EC362D;
+    position: absolute;
+    top: 15px;
+    right: 0;
+    z-index: 2;
+
+    border-radius: 10px 0px 0px 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+}
+.settings-quizz:hover{
+    cursor: pointer;
 }
 @media (max-width:1100px) {
     .title-quizz{

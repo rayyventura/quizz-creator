@@ -160,6 +160,7 @@ input.question-color{
     display: flex;
     align-items: flex-end;
     cursor: pointer;
+    position: relative;
 }
 .visualize-quizz p{
     font-family: Roboto;

@@ -13,99 +13,99 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-</head>
-<body>
-  <header class ="page-header">
-    <p class= "name"> BuzzQuizz </p>
-  </header>
-  <main class="main-content">
+  </head>
+  <body>
+    <header class ="page-header">
+      <p class= "name"> BuzzQuizz </p>
+    </header>
+    <main class="main-content">
 
-    <div class="main-screen minimize">
-      <div class="add-more"></div>
-      <div class="upper-box">
-        <div class = "first-line">
-          <p class= "noquizzyet"> Você não criou nenhum quizz ainda :( </p>
+      <div class="main-screen minimize">
+        <div class="add-more"></div>
+        <div class="upper-box">
+          <div class = "first-line">
+            <p class= "noquizzyet"> Você não criou nenhum quizz ainda :( </p>
+          </div>
+          <button class="create-quizz" onclick="createQuizz()" data-identifier="create-quizz">
+            <p class= "creating-quizz">Criar Quizz</p>
+          </button>
         </div>
-        <button class="create-quizz" onclick="createQuizz()" data-identifier="create-quizz">
-          <p class= "creating-quizz">Criar Quizz</p>
-        </button>
-      </div>
-    
-      <div class="title ">
-        <p class="all-quizzes">Todos os Quizzes</p>
-      </div>      
+      
+        <div class="title ">
+          <p class="all-quizzes">Todos os Quizzes</p>
+        </div>      
 
-      <div class="quizzes "> 
+        <div class="quizzes "> 
+        </div>  
+      
       </div>  
-    
-    </div>  
 
-    <div class="quizz-screen minimize">
-      <div class="title-quizz">
-      </div>
-    
-      <div class="container-quizz">
-        
-      </div>
-      <div class="area-buttons">
-        <button class="restart" onclick="restartquizz()">Reiniciar Quizz</button>
-        <p class="back-home" onclick="backhome()">Voltar para home</p>
-      </div>
-    
-    </div>
-
-    <div class="quizz-creation ">
-      <div class="basic-info minimize">
-        <div class="quizz-title">
-            Comece pelo começo
+      <div class="quizz-screen minimize">
+        <div class="title-quizz">
         </div>
-        <div class="input-infos">
-            <input class='pick-title' type="text" placeholder="Título do seu quizz">
-            <input class='pick-image' type="text" placeholder="URL da imagem do seu quizz">
-            <input class='pick-questionsNº' type="text" placeholder="Quantidade de perguntas do quizz">
-            <input class='pick-levelsNº' type="text" placeholder="Quantidade de níveis do quizz">
-        </div>
-        <button class="button-submit" onclick="startInformation()">Prosseguir pra criar perguntas</button>
-      </div>
-      <div class="quizz-questions minimize">
-        <div class="quizz-title">
-            Crie suas perguntas
-        </div>
-        <div class="Perguntas">
-        </div>
-        <button class="button-submit" onclick="validateQuestions()">Prosseguir pra criar níveis</button>
-      </div>
-      <div class="level-page minimize">
-        <div class="quizz-title">
-            Agora decida os níves
-        </div>
-        <div class="Levels">
+      
+        <div class="container-quizz">
           
         </div>
-        <button class="button-submit" onclick="validateLevels()">Finalizar Quizz</button>
-      </div>
-      <div class="final-page minimize">
-        <div class="quizz-title">
-            Seu quizz está pronto
+        <div class="area-buttons">
+          <button class="restart" onclick="restartquizz()">Reiniciar Quizz</button>
+          <p class="back-home" onclick="backhome()">Voltar para home</p>
         </div>
-        <div class="done-quizz"> 
       
-        </div>
-        <div class="finalButton">
-          <button class="button-submit" >Acessar quizz</button>
-        </div>
-        <div class="return-home" onclick="returnHome()">Voltar para Home</div>
       </div>
-    </div>
 
-    <div class="loading-screen">
-      <img src="assets/loading.gif" />
-      <p>Carregando</p>
-    </div>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>    
-  <script src="Javascript/creatingQuizz.js"> </script>
-  <script src="Javascript/scripts.js"> </script>
-       
-</body>
+      <div class="quizz-creation ">
+        <div class="basic-info minimize">
+          <div class="quizz-title">
+              Comece pelo começo
+          </div>
+          <div class="input-infos">
+              <input class='pick-title' type="text" placeholder="Título do seu quizz" minlength="20" maxlength="65">
+              <input class='pick-image' type="text" placeholder="URL da imagem do seu quizz">
+              <input class='pick-questionsNº' type="text" placeholder="Quantidade de perguntas do quizz">
+              <input class='pick-levelsNº' type="text" placeholder="Quantidade de níveis do quizz">
+          </div>
+          <button class="button-submit" onclick="startInformation()">Prosseguir pra criar perguntas</button>
+        </div>
+        <div class="quizz-questions minimize">
+          <div class="quizz-title">
+              Crie suas perguntas
+          </div>
+          <div class="Perguntas">
+          </div>
+          <button class="button-submit" onclick="validateQuestions()">Prosseguir pra criar níveis</button>
+        </div>
+        <div class="level-page minimize">
+          <div class="quizz-title">
+              Agora decida os níves
+          </div>
+          <div class="Levels">
+            
+          </div>
+          <button class="button-submit" onclick="validateLevels()">Finalizar Quizz</button>
+        </div>
+        <div class="final-page minimize">
+          <div class="quizz-title">
+              Seu quizz está pronto
+          </div>
+          <div class="done-quizz"> 
+        
+          </div>
+          <div class="finalButton">
+            <button class="button-submit" >Acessar quizz</button>
+          </div>
+          <div class="return-home" onclick="returnHome()">Voltar para Home</div>
+        </div>
+      </div>
+
+      <div class="loading-screen">
+        <img src="assets/loading.gif" />
+        <p>Carregando</p>
+      </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>    
+    <script src="Javascript/creatingQuizz.js"> </script>
+    <script src="Javascript/scripts.js"> </script>
+        
+  </body>
 </html>
