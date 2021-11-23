@@ -207,6 +207,7 @@ input.question-color{
     display:flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+    gap: 15px;
 }
 
 @media(max-width: 1100px){

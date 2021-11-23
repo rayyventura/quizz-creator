@@ -51,7 +51,6 @@ function getQuizz(quizzId){
 
 }
 
-
 let countquizz = [0,0];
 let levelinfo, idquizz;
 function startquizz(id){
@@ -154,7 +153,6 @@ function cardselected(button, correct){
         resultcalc();
     }
 }
-
 function resultcalc(){
     console.log(levelinfo);
     setTimeout(()=>{
@@ -169,7 +167,9 @@ function resultcalc(){
        
         resultarea.innerHTML+= `
             <div class="box-result">
-                <div class="result" data-identifier="quizz-result">${result}% de acerto: ${levelinfo[level].title}</div>
+                <div class="result" data-identifier="quizz-result">
+                    <p>${result}% de acerto: ${levelinfo[level].title}</p>
+                </div>
                 <div class="result-details">
                     <img src="${levelinfo[level].image}"/>
                     <div>${levelinfo[level].text}</div>
@@ -181,7 +181,6 @@ function resultcalc(){
         
     }, 2000);
 }
-
 function restartquizz(){
     startquizz(idquizz);
     document.querySelector(".title-quizz").scrollIntoView();
@@ -195,14 +194,7 @@ function restartquizz(){
     
 }
 function backhome(){
-    document.querySelector(".loading-screen").classList.remove("minimize");
-    document.querySelector(".quizz-screen").classList.add("minimize");
-    setTimeout(()=>{
-        document.querySelector(".loading-screen").classList.add("minimize");
-        document.querySelector(".main-screen").classList.remove("minimize");
-
-        document.querySelector(".add-more").scrollIntoView();
-    }, 1000);
+    location.reload();
+    
 }
-
 getQuizzes();
