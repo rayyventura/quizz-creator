@@ -89,7 +89,7 @@ function startquizz(id){
 
             areaquestion.innerHTML += `
                 <div class="box-quizz">
-                    <div class="question" style="background-color: ${questions[i].color}; ">
+                    <div class="question" style="background-color: ${questions[i].color};" data-identifier="question">
                     <p>${questions[i].title}</p></div>
                     <div class="options">                        
                     </div>
@@ -112,7 +112,7 @@ function startquizz(id){
             const localanswers = document.querySelectorAll(".options");
             for(let j=0; j< questions[i].answers.length; j++){
                 localanswers[i].innerHTML +=`
-                    <div class="answer ${answerresult[j]}" onclick="cardselected(this,${questions[i].answers[number_question[j]].isCorrectAnswer})">
+                    <div class="answer ${answerresult[j]}" onclick="cardselected(this,${questions[i].answers[number_question[j]].isCorrectAnswer})" data-identifier="answer">
                         <img src="${questions[i].answers[number_question[j]].image}"/>
                         <p>${questions[i].answers[number_question[j]].text}</p>
                     </div>
@@ -169,7 +169,7 @@ function resultcalc(){
        
         resultarea.innerHTML+= `
             <div class="box-result">
-                <div class="result">${result}% de acerto: ${levelinfo[level].title}</div>
+                <div class="result" data-identifier="quizz-result">${result}% de acerto: ${levelinfo[level].title}</div>
                 <div class="result-details">
                     <img src="${levelinfo[level].image}"/>
                     <div>${levelinfo[level].text}</div>
@@ -185,6 +185,13 @@ function resultcalc(){
 function restartquizz(){
     startquizz(idquizz);
     document.querySelector(".title-quizz").scrollIntoView();
+    document.querySelector(".loading-screen").classList.remove("minimize");
+    document.querySelector(".quizz-screen").classList.add("minimize");
+    setTimeout(()=>{
+        document.querySelector(".loading-screen").classList.add("minimize");
+        document.querySelector(".quizz-screen").classList.remove("minimize");
+    }, 500);
+    
     
 }
 function backhome(){
