@@ -89,7 +89,9 @@ function startquizz(id){
 
             areaquestion.innerHTML += `
                 <div class="box-quizz">
-                    <div class="question" style="background-color: ${questions[i].color}; ">${questions[i].title}</div>
+                    <div class="question" style="background-color: ${questions[i].color}; ">
+                    <p>${questions[i].title}</p>
+                    </div>
                     <div class="options">                        
                     </div>
                 </div>
