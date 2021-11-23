@@ -246,8 +246,7 @@ body{
     width: 100%;
     min-height: 137.99px;
 
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 5px 5px 5px 5px;
 
     font-size: 23px;
     font-weight: 700;
