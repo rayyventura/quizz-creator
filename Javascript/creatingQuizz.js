@@ -14,8 +14,12 @@ let numberInfos={leastPercentage: false, questionNumber : 0, levelNumber : 0,num
 
 
 const createQuizz=()=>{
-    basicInfo.classList.remove('minimize');
+    document.querySelector(".loading-screen").classList.remove("minimize");
     mainScreen.classList.add('minimize');
+    setTimeout(()=>{
+        basicInfo.classList.remove('minimize');
+        document.querySelector(".loading-screen").classList.add("minimize");
+    }, 500);
 }
 const  startInformation =()=>{
     const pickTitle = document.querySelector('.pick-title').value;
