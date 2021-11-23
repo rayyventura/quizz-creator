@@ -166,11 +166,13 @@ input.question-color{
     font-family: Roboto;
     font-weight: normal;
     font-size: 23px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+
     color: #FFFFFF;
-    margin: 0px 0px 23px 23px;
+
+    position: absolute;
+    bottom: 0;
+    margin: 0px 5px 5px 5px;
+    
 }
 .upper-box .visualize-quizz{
     background-size: 340px 180px;
@@ -183,6 +185,11 @@ input.question-color{
     line-height: 23px;
    
     margin-right: 12px;
+}
+.selectionarea{
+    width: 340px;
+    height: 181px;
+    position: relative;
 }
 
 .add-more{

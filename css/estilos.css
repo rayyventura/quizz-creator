@@ -37,8 +37,9 @@ body{
 .all-quizzes,.upper-box{
    margin-left: 11%;
 } 
+
 .upper-box{
-    height: 181px;
+    min-height: 181px;
     width: 77%;
     border-radius: 5px;
     border: 1px dashed #D4D4D4;
