@@ -16,7 +16,7 @@ function showingQuizzLayout (quizz){
     setTimeout(()=>{
         document.querySelector(".loading-screen").classList.add("minimize");
         document.querySelector(".main-screen").classList.remove("minimize");
-    }, 1500);
+    }, 1-00);
 
     
 }
