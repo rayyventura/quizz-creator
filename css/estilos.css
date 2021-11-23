@@ -37,7 +37,10 @@ body{
 .all-quizzes,.upper-box{
    margin-left: 11%;
 } 
-
+.title{
+    padding-top: 77px;
+    color: #000000;
+}
 .upper-box{
     min-height: 181px;
     width: 77%;
@@ -84,10 +87,6 @@ body{
     letter-spacing: 0em;
     text-align: center;
     color: #EC362D;
-}
-.title{
-    padding-top: 77px;
-    color: #000000;
 }
 
 .all-quizzes{
@@ -436,6 +435,9 @@ body{
         min-height: 89px;
     
         font-size: 19px;
+    }
+    .question p{
+        max-width: 320px;
     }
     .options{
         margin-top: 13px;        
