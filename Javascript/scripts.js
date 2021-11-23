@@ -89,7 +89,8 @@ function startquizz(id){
 
             areaquestion.innerHTML += `
                 <div class="box-quizz">
-                    <div class="question" style="background-color: ${questions[i].color}; ">${questions[i].title}</div>
+                    <div class="question" style="background-color: ${questions[i].color}; ">
+                    <p>${questions[i].title}</p></div>
                     <div class="options">                        
                     </div>
                 </div>
@@ -187,8 +188,14 @@ function restartquizz(){
     
 }
 function backhome(){
-    document.querySelector(".main-screen").classList.remove("minimize");
+    document.querySelector(".loading-screen").classList.remove("minimize");
     document.querySelector(".quizz-screen").classList.add("minimize");
+    setTimeout(()=>{
+        document.querySelector(".loading-screen").classList.add("minimize");
+        document.querySelector(".main-screen").classList.remove("minimize");
+
+        document.querySelector(".add-more").scrollIntoView();
+    }, 1000);
 }
 
 getQuizzes();
