@@ -319,8 +319,7 @@ function deleteQuizzes(id){
             }
         }
     )
-    
-
+  
 }
 function atualizeQuizzes(){
     const idSerial = localStorage.getItem("Ids");
@@ -347,6 +346,7 @@ function atualizeQuizzes(){
                     ownQuizzes.innerHTML +=` <div onclick="accessQuizz(${idDiserial[i]})" class='visualize-quizz' style='background-image: 
                     linear-gradient(to top, black, transparent), url(${response.data.image})'> 
                     <p>${response.data.title}</p>
+                    <button class="button-submit delete-quizz" onclick="deleteQuizzes(${idDiserial[i]})"> Apagar quizz </button>
                     </div>`  
                      });
                      promise.catch((response)=>{
