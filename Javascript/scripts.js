@@ -5,13 +5,19 @@ function showingQuizzLayout (quizz){
     const image = `<img class="img-layout" src ="${quizz.image}">`
     quizzCard.setAttribute("data-identifier","quizz-card");
     quizzCard.classList.add("quizz")
-    const quizzTitle = `<p class ="quizzes-names typography">(${quizz.title})</p>`
+    const quizzTitle = `<p class ="quizzes-names typography">${quizz.title}</p>`
     let quizzSpace = document.querySelector(".quizzes")
     quizzCard.innerHTML= `${colors} ${image} ${quizzTitle}`
     quizzCard.onclick = function (){
         startquizz(quizz.id)
     }
-    quizzSpace.appendChild(quizzCard)
+    quizzSpace.appendChild(quizzCard);
+
+    setTimeout(()=>{
+        document.querySelector(".loading-screen").classList.add("minimize");
+        document.querySelector(".main-screen").classList.remove("minimize");
+    }, 1500);
+
     
 }
 function getQuizzes(){
@@ -51,7 +57,7 @@ let levelinfo, idquizz;
 function startquizz(id){
     
     document.querySelector(".main-screen").classList.add("minimize");
-    document.querySelector(".quizz-screen").classList.remove("minimize");
+    document.querySelector(".loading-screen").classList.remove("minimize");
 
     idquizz = id;
     countquizz = [0,0];
@@ -83,7 +89,7 @@ function startquizz(id){
 
             areaquestion.innerHTML += `
                 <div class="box-quizz">
-                    <div class="question">${questions[i].title}</div>
+                    <div class="question" style="background-color: ${questions[i].color}; ">${questions[i].title}</div>
                     <div class="options">                        
                     </div>
                 </div>
@@ -117,6 +123,11 @@ function startquizz(id){
     quizz.catch((erro)=>{
         //console.log(erro.response);
     });
+    
+    setTimeout(()=>{
+        document.querySelector(".loading-screen").classList.add("minimize");
+        document.querySelector(".quizz-screen").classList.remove("minimize");
+    }, 1500);
 }
 function cardselected(button, correct){
 
@@ -180,4 +191,4 @@ function backhome(){
     document.querySelector(".quizz-screen").classList.add("minimize");
 }
 
-getQuizzes()
+getQuizzes();
