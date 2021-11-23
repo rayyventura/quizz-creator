@@ -384,5 +384,15 @@ function isHexColor(color){
 }
 
 function deletQuizzes(id){
+    const gettingKey= localStorage.getItem('key')
+    const keyStorage = JSON.parse(gettingKey)
+    const promise = axios.delete(
+        `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`,
+    {
+        headers: {
+            'Secret-Key':keyStorage[id]
+        }
+    }
+    )  
     
 }
