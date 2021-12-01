@@ -3,6 +3,7 @@ const quizzQuestions = document.querySelector('.quizz-questions');
 const quizzLevels = document.querySelector('.level-page');
 const mainScreen = document.querySelector('.main-screen');
 const finalPage = document.querySelector('.final-page');
+let idDiserial;
 let quizz = {};
 let id;
 let questions=[];
@@ -249,8 +250,6 @@ const validateLevels = () =>{
 
     }
         formulateQuizz();
-        console.log('Eu sou o quizz');
-        console.log(quizz);
         sendQuizz();
         quizzLevels.classList.add('minimize');
         finalPage.classList.remove('minimize');
@@ -267,7 +266,6 @@ function formulateQuizz(){
 
 
 function sendQuizz(){
-    console.log(quizz);
     const promise = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes',quizz);
     promise.then((response) => {
         id=response.data.id;
@@ -295,7 +293,7 @@ function sendQuizz(){
 }
 function atualizeQuizzes(){
     const idSerial = localStorage.getItem("Ids");
-    const idDiserial = JSON.parse(idSerial);
+    idDiserial = JSON.parse(idSerial);
     if(idDiserial!==null){
         if(idDiserial.length>0){
             const addMore = document.querySelector('.add-more');
@@ -400,7 +398,6 @@ function storeKey(id, key){
 }
 function deleteQuizzes(id){
     let answer = window.confirm("Deseja excluir este quizz?");
-    console.log(answer);
     if(answer){
         const gettingKey= localStorage.getItem('key')
         const keyStorage = JSON.parse(gettingKey)
@@ -415,7 +412,12 @@ function deleteQuizzes(id){
         promise.then((resp)=>{location.reload();});
         promise.catch((resp)=>{alert("falhou!")});
     }
-    
+    idDiserial.forEach((element,index)=>{
+        if(element===id){
+            idDiserial.splice(index,1);
+        }
+    });
+    localStorage.setItem("Ids",JSON.stringify(idDiserial));
 
 }
 function editQuizzes(){
