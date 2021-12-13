@@ -1,4 +1,4 @@
-# Quizz Creator - BuzzQuizz
+## BuzzQuizz
 **Site Published at**: https://rayyventura.github.io/Quizz_Creator_-BuzzQuizz-/
 
 
