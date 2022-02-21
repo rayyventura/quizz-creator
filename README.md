@@ -1,5 +1,5 @@
 ## BuzzQuizz
-**Site Published at**: https://rayyventura.github.io/Quizz_Creator_-BuzzQuizz-/
+**Site Published at**: https://rayyventura.github.io/quizz-creator/
 
 
 ## Quizz Creator and Visualizer App </br>
